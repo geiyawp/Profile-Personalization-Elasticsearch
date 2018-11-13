@@ -1,0 +1,48 @@
+.btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #1c1c1c;
+	  color: #fff;
+	}
+
+.register a {
+	margin: 15px;
+	position: absolute;
+	right: 15px;
+	top: 5px;
+	font-family: "verdana";
+}
+.user-name a {
+	margin: 15px;
+	position: absolute;
+	left: 15px;
+	top: 5px;
+	padding:10px;
+	background-color: #60caff;
+	border-radius: 15px;
+	color: #fff;
+	font-family: "verdana";
+	font-weight: bold;
+	text-decoration: none;
+}
+.user-name a:hover {
+	text-decoration: none;
+	margin: 15px;
+	position: absolute;
+	left: 15px;
+	top: 5px;
+	padding:10px;
+	background-color: #71dbff;
+	color: #fff;
+	font-family: "verdana";
+	font-weight: bold;
+	}
