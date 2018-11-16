@@ -15,56 +15,32 @@
 	$oAuth = new Google_Service_Oauth2($go);
 	$userData = $oAuth->userinfo_v2_me->get();
 	$plus = new Google_Service_Plus($go);
-	$user_id = $userData['id'];
+	$user_id = $userData['id']; // getting google user id
 	$me = $plus->people->get('me');
 	
-	$place = $me->getPlacesLived();
-	$preMail = $me->getEmails();
-	$org = $me->getOrganizations();
+	$place = $me->getPlacesLived(); // getting places data from the API
+	$preMail = $me->getEmails(); // getting email data
+	$org = $me->getOrganizations(); // getting organization data for education
 
-// ===============Kodingan lama current location========================
-	
-	// $curr_location = $place[0]['value'];
-	// $preLocation = array();
-//======================================================================
  
-	//	Kodingan location baru
+	
 	if (!empty($place[0]['primary'])) {
-		$curr_location = $place[0]['value'];
-		$prev_location = $place[1]['value'];
+		$curr_location = $place[0]['value'];  // getting current location and store to variable
+		$prev_location = $place[1]['value'];  // getting previous location and store to variable
 	}
 	else {
 		$curr_location = "";
 		$prev_location = $place[0]['value'];
 	}
 
-	// print_r($curr_location);
-	// echo "<br>";
-	// print_r($prev_location);
 
-// ==========Kodingan lama buat prev_location===============
-	
-	// foreach ($place as $k) {
-	// 	if (isset($preLocation)) {
-	// 		array_push($preLocation, $k['value']);
-	// 	}	
-	// }
 
-//
+	$email = ($preMail[0]['value']);	// store email to variable
+	$school = $org[0]['name'];		// store school to variable	
+	$department = $org[0]['title'];		// store the department to variable
 
-	// unset($preLocation[0]);
-	// $prev_location = implode(", ", $preLocation);
-
-	// print_r($prev_location);
-
-// ===========================================================
-
-	$email = ($preMail[0]['value']);
-	$school = $org[0]['name'];
-	$department = $org[0]['title'];
-
-	//harus di check tiap variable biar gak null, klo bisa ganti empty aja soalnya
-	// ada empty string juga
+	// checking value in every variable to make sure there's no null value, cuz it will
+	// made elasticsearch error when indexing, also other errors u don't want to bother
 
 	if (!empty($me['id'])) {
 		$_SESSION['id'] = $me['id'];
@@ -127,7 +103,9 @@
 		$_SESSION['prev_location'] = '-';
 	}
 	
-
+	// checking whether the user already exist in users index or not
+	// if the users already exist then the system won't index em again
+	// if the user has not exist in the index, then the system will index the user data
 	$params = [
 	    'index' => 'users',
 	    'type' => 'user_mapping',
@@ -146,12 +124,9 @@
 	}
 	
 	
-	//var_dump($user);
-	
 	if($user['hits']['total'] >=1) {
 
 		$_SESSION['user_status'] = 'Status: User already exist';
-		// echo("Profile already exist!");
 	}
 	else {
 	$indexed = $client->index([
@@ -177,6 +152,6 @@
      $_SESSION['user_status'] = 'Status: user indexed';
   }
 
-	header('Location: index.php?q=');
+	header('Location: index.php?q=');		// redirect to index page
 	exit();
 ?>
