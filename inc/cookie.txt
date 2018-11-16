@@ -1,9 +1,0 @@
-c_user = 1839593173;
-datr = sq9sWyliDJa2czCbt__F4B3O;
-fr = 0nCl6CBEeIAGcs9GI.AWVGBo2A-wkAml80tkQ2QD6hOs0.BbUj3S.iA.Fuh.0.0.BbooS7.AWW1KdTO;
-locale = en_US;
-m_pixel_ratio = 1;
-pl = n;
-sb = OEJSW7stJw2GrrUtPjjsmwjK;
-wd =  842x631;
-xs = 42%3AWXp0TPcuxI4d1Q%3A2%3A1537377467%3A7973%3A11258;
