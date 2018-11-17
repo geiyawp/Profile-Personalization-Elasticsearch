@@ -5,6 +5,7 @@ Stack:
 - Elasticsearch 6.1.2
 - PHP 5.6
 - Bootstrap
+- elasticsearch-php
 
 Some description: 
 
